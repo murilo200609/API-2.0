@@ -1,41 +1,41 @@
-# API-2.0
+Exemplo Prático Simples Docker Composer (Prof Hugo Rafael)
 
-## 📌 Descrição
+Agora, dentro da pasta onde está o docker-compose.yml, execute:
 
-Este projeto tem como objetivo desenvolver e disponibilizar uma API RESTful que oferece funcionalidades relacionadas a [descrição do propósito da API — ex: recomendação de softwares, consulta de produtos, etc.].
+docker-compose up -d
+Isso fará o PHP com Apache e o MySQL subirem juntos!
 
-## 🚀 Funcionalidades
+Para testar, acesse no navegador:
+http://localhost:8080/
 
-- [✔️] Endpoint para [listar produtos / softwares].
-- [✔️] Filtro por [categoria / popularidade / preço].
-- [✔️] Integração com [base de dados interna / Amazon / outro serviço].
-- [✔️] Documentação automática com Swagger/OpenAPI.
-- [❌] Autenticação de usuários (em desenvolvimento).
+Se tudo estiver certo, você verá a mensagem:
+"Conectado ao MySQL com sucesso!"
 
-## 🛠 Tecnologias Utilizadas
+Se precisar parar os containers:
 
-- Python 3.x
-- FastAPI
-- Uvicorn
-- Pandas / NumPy (para manipulação de dados)
-- [Outros pacotes relevantes, se houver]
+docker-compose down
 
-## 📁 Estrutura do Projeto
+---Explicação!---
 
+./Dockerfile
+Usa a imagem oficial PHP + Apache.
 
-## ⚙️ Como Executar
+Instala a extensão mysqli para conectar ao MySQL.
 
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/API-2.0.git
-cd API-2.0
+Copia os arquivos da pasta src/ para dentro do servidor web no container.
 
-python -m venv venv
-source venv/bin/activate   # Linux/macOS
-venv\Scripts\activate      # Windows
+Define a porta 80 para o Apache.
 
-pip install -r requirements.txt
+./docker-compose.yml
 
-uvicorn app.main:app --reload
+Define dois serviços: php-apache e mysql.
 
-pytest
+O MySQL cria um banco chamado meu_banco com o usuário e senha definidos.
+
+O PHP depende do MySQL (depends_on).
+
+Usa volumes para persistir os dados do banco mesmo se o container for removido.
+
+Cria uma rede Docker chamada minha-rede para comunicação entre os containers.
+
+Agora você tem um ambiente PHP + MySQL pronto para desenvolvimento! 
